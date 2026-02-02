@@ -1,4 +1,5 @@
-document.getElementById("loadTasksBtn").addEventListener("click", async () => {
+const downloadButton = document.getElementById("loadTasksBtn")
+downloadButton.addEventListener("click", async () => {
   const tasksList = document.getElementById("tasksList");
   tasksList.innerHTML = "<li>Loading...</li>";
 
@@ -10,6 +11,7 @@ document.getElementById("loadTasksBtn").addEventListener("click", async () => {
     if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
 
     const tasks = await resp.json();
+    console.log(tasks)
 
     if (!tasks.length) {
       tasksList.innerHTML = "<li>No tasks found</li>";
@@ -17,7 +19,7 @@ document.getElementById("loadTasksBtn").addEventListener("click", async () => {
     }
 
     tasksList.innerHTML = tasks
-      .map(t => `<li><strong>${t.title ?? t.id}</strong> — ${t.status ?? "unknown"}</li>`)
+      .map(t => `<li>${t.taskName}, ${t.userName}, ${t.id}, ${t.assigneeId}</li>`)
       .join("");
   } catch (err) {
     console.error(err);
