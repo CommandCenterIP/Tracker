@@ -62,8 +62,8 @@ app.post("/api/tasks", async (req, res) => {
   }
 });
 
-// Serve static files (index.html, script.js, style.css) from /public
-app.use(express.static(path.join(__dirname, "public")));
+// Serve static files (index.html, script.js, style.css) from root
+app.use(express.static(__dirname));
 
 const port = process.env.PORT || 8080;
 app.listen(port, () => {
